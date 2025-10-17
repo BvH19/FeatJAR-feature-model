@@ -30,7 +30,6 @@ import de.featjar.base.tree.Trees;
 import de.featjar.feature.model.FeatureModel;
 import de.featjar.feature.model.IConstraint;
 import de.featjar.feature.model.analysis.visitor.AtomsCountTreeVisitor;
-
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
@@ -45,13 +44,13 @@ import java.util.List;
  * @author Florian Beese
  * */
 public class ComputeAtomsCount extends AComputation<Integer> {
-	public static final Dependency<FeatureModel> FEATUREMODEL = Dependency.newDependency(FeatureModel.class);
+    public static final Dependency<FeatureModel> FEATUREMODEL = Dependency.newDependency(FeatureModel.class);
     // COUNTCONSTANTS decide if Atoms of type constants should be counted
-	public static final Dependency<Boolean> COUNTCONSTANTS = Dependency.newDependency(Boolean.class);
+    public static final Dependency<Boolean> COUNTCONSTANTS = Dependency.newDependency(Boolean.class);
     // COUNTVARIABLES decide if Atoms of type variable should be counted
-	public static final Dependency<Boolean> COUNTVARIABLES = Dependency.newDependency(Boolean.class);
+    public static final Dependency<Boolean> COUNTVARIABLES = Dependency.newDependency(Boolean.class);
     // COUNTBOOLEAN decide if Atoms of type True or False should be counted
-	public static final Dependency<Boolean> COUNTBOOLEAN = Dependency.newDependency(Boolean.class);
+    public static final Dependency<Boolean> COUNTBOOLEAN = Dependency.newDependency(Boolean.class);
 
     public ComputeAtomsCount(IComputation<FeatureModel> featureModel) {
         super(

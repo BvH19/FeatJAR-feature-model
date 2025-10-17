@@ -169,9 +169,9 @@ public class FormatConversionTest {
      */
     @Test
     void testWriteAndOverwrite() throws IOException {
-    	if (! FeatJAR.isInitialized()) {
-    		FeatJAR.initialize();
-    	}
+        if (!FeatJAR.isInitialized()) {
+            FeatJAR.initialize();
+        }
 
         Path outputPath = Paths.get("model_testWriteAndOverwrite.xml");
         FeatureModel model = generateModel();

@@ -122,7 +122,7 @@ public class PrintStatisticsTest {
                 "model_outputWithoutFileExtension",
                 "--overwrite");
         assertEquals(1, exit_code);
-    } 
+    }
 
     /**
      * Testing whether collecting statistics with scope specified to ALL actually returns values for all parameters.
@@ -192,7 +192,9 @@ public class PrintStatisticsTest {
                 + "[Tree 1] Average Number of Children      : \n"
                 + "";
 
-        assertEquals(comparison.replaceAll("[^a-zA-Z0-9:.,]", ""), printStats.buildStringPrettyStats(testData).toString().replaceAll("[^a-zA-Z0-9:.,]", ""));
+        assertEquals(
+                comparison.replaceAll("[^a-zA-Z0-9:.,]", ""),
+                printStats.buildStringPrettyStats(testData).toString().replaceAll("[^a-zA-Z0-9:.,]", ""));
     }
     // TODO implement this test once the jsonHashMapToTree() function works in AnalysisTreeTransformer
     /**

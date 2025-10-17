@@ -29,7 +29,6 @@ import de.featjar.base.tree.Trees;
 import de.featjar.feature.model.FeatureModel;
 import de.featjar.feature.model.IConstraint;
 import de.featjar.feature.model.analysis.visitor.OperatorDistributionTreeVisitor;
-
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -43,7 +42,7 @@ import java.util.List;
  * @author Florian Beese
  * */
 public class ComputeOperatorDistribution extends AComputation<HashMap<String, Integer>> {
-	public static final Dependency<FeatureModel> FEATUREMODEL = Dependency.newDependency(FeatureModel.class);
+    public static final Dependency<FeatureModel> FEATUREMODEL = Dependency.newDependency(FeatureModel.class);
 
     public ComputeOperatorDistribution(IComputation<FeatureModel> featureModel) {
         super(featureModel);

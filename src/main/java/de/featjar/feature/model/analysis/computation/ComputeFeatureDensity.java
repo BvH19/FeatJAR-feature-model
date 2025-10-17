@@ -29,7 +29,6 @@ import de.featjar.base.tree.Trees;
 import de.featjar.feature.model.FeatureModel;
 import de.featjar.feature.model.IConstraint;
 import de.featjar.feature.model.analysis.visitor.FeatureDensityTreeVisitor;
-
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
@@ -45,7 +44,7 @@ import java.util.Set;
  * @author Florian Beese
  * */
 public class ComputeFeatureDensity extends AComputation<Float> {
-	public static final Dependency<FeatureModel> FEATUREMODEL = Dependency.newDependency(FeatureModel.class);
+    public static final Dependency<FeatureModel> FEATUREMODEL = Dependency.newDependency(FeatureModel.class);
 
     public ComputeFeatureDensity(IComputation<FeatureModel> featureModel) {
         super(featureModel);

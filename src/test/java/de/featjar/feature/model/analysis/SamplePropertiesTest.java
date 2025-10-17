@@ -199,9 +199,9 @@ public class SamplePropertiesTest {
 
     @Test
     public void computeUniformity() {
-    	if (! FeatJAR.isInitialized()) {
-    		FeatJAR.initialize();
-    	}
+        if (!FeatJAR.isInitialized()) {
+            FeatJAR.initialize();
+        }
         IComputation<LinkedHashMap<String, Float>> computation = Computations.of(
                         (IFeatureModel) createMediumFeatureModel())
                 .map(ComputeUniformity::new)
@@ -295,7 +295,7 @@ public class SamplePropertiesTest {
         assertEquals(((float) 0 / 3) - ((float) 0 / 26), result.get("Linux_undefined"));
         assertEquals(((float) 0 / 3) - ((float) 0 / 26), result.get("Transactions_undefined"));
         System.out.println(result);
-        
+
         FeatJAR.deinitialize();
     }
 
