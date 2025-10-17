@@ -30,6 +30,11 @@ import de.featjar.feature.model.FeatureModel;
 import de.featjar.feature.model.IFeature;
 import de.featjar.feature.model.IFeatureModel;
 import de.featjar.feature.model.IFeatureTree;
+import de.featjar.feature.model.analysis.computation.ComputeDistributionFeatureSelections;
+import de.featjar.feature.model.analysis.computation.ComputeFeatureCounter;
+import de.featjar.feature.model.analysis.computation.ComputeNumberConfigurations;
+import de.featjar.feature.model.analysis.computation.ComputeNumberVariables;
+import de.featjar.feature.model.analysis.computation.ComputeUniformity;
 import de.featjar.feature.model.transformer.ComputeFormula;
 import de.featjar.formula.VariableMap;
 import de.featjar.formula.assignment.BooleanAssignment;
@@ -289,6 +294,7 @@ public class SamplePropertiesTest {
         assertEquals(((float) 0 / 3) - ((float) 0 / 26), result.get("Windows_undefined"));
         assertEquals(((float) 0 / 3) - ((float) 0 / 26), result.get("Linux_undefined"));
         assertEquals(((float) 0 / 3) - ((float) 0 / 26), result.get("Transactions_undefined"));
+        System.out.println(result);
         
         FeatJAR.deinitialize();
     }

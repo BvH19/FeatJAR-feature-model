@@ -155,8 +155,8 @@ public class FormatConversionTest {
                 + "\n"
                 + "Output model saved at: model_invalidInput.dot\n"
                 + "";
-        String stringTrimmedCopy = string.replaceAll("[^a-zA-Z1-9:]", "");
-        String expectedOutputTrimmedCopy = expected_output.replaceAll("[^a-zA-Z1-9:]", "");
+        String stringTrimmedCopy = string.replaceAll("[^a-zA-Z0-9:.,]", "");
+        String expectedOutputTrimmedCopy = expected_output.replaceAll("[^a-zA-Z0-9:.,]", "");
         assertEquals(expectedOutputTrimmedCopy, stringTrimmedCopy);
         assertTrue(stringTrimmedCopy.startsWith(expectedOutputTrimmedCopy));
 

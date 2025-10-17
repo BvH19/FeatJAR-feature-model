@@ -18,10 +18,9 @@
  *
  * See <https://github.com/FeatureIDE/FeatJAR-feature-model> for further information.
  */
-package de.featjar.feature.model.computation;
+package de.featjar.feature.model.analysis.computation;
 
 import de.featjar.base.computation.AComputation;
-import de.featjar.base.computation.Computations;
 import de.featjar.base.computation.Dependency;
 import de.featjar.base.computation.IComputation;
 import de.featjar.base.computation.Progress;
@@ -29,54 +28,41 @@ import de.featjar.base.data.Result;
 import de.featjar.base.tree.Trees;
 import de.featjar.feature.model.FeatureModel;
 import de.featjar.feature.model.IConstraint;
-import de.featjar.feature.model.analysis.AtomsCount;
+import de.featjar.feature.model.analysis.visitor.FeatureDensityTreeVisitor;
+
 import java.util.Collection;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 /**
- * Call the visitor AtomsCount on all constraints of a feature model to count the terminal expressions and then
- * compute the average in relation to the count of constraints of a feature model.
- * It is possible to set the three variables COUNTCONSTANTS, COUNTVARIABLES and COUNTBOOLEAN in order
- * to set what should be counted.
+ * Call the visitor FeatureDensity on all constraints of a feature model to get the density of the used features in the constraints.
  * For further information on its methods see {@link IComputation}
  *
  * @author Mohammad Khair Almekkawi
  * @author Florian Beese
  * */
-public class ComputeAverageConstraint extends AComputation<Float> {
+public class ComputeFeatureDensity extends AComputation<Float> {
 	public static final Dependency<FeatureModel> FEATUREMODEL = Dependency.newDependency(FeatureModel.class);
-	public static final Dependency<Boolean> COUNTCONSTANTS = Dependency.newDependency(Boolean.class);
-	public static final Dependency<Boolean> COUNTVARIABLES = Dependency.newDependency(Boolean.class);
-	public static final Dependency<Boolean> COUNTBOOLEAN = Dependency.newDependency(Boolean.class);
 
-    public ComputeAverageConstraint(IComputation<FeatureModel> featureModel) {
-        super(
-                featureModel,
-                Computations.of(Boolean.TRUE),
-                Computations.of(Boolean.TRUE),
-                Computations.of(Boolean.TRUE));
+    public ComputeFeatureDensity(IComputation<FeatureModel> featureModel) {
+        super(featureModel);
     }
 
     @Override
     public Result<Float> compute(List<Object> dependencyList, Progress progress) {
         FeatureModel featureModel = FEATUREMODEL.get(dependencyList);
         Collection<IConstraint> Constraints = featureModel.getConstraints();
-        int atomsSum = 0;
+        Set<String> unionSet = new HashSet<String>();
 
         Iterator<IConstraint> constraintIterator = Constraints.iterator();
         while (constraintIterator.hasNext()) {
-            atomsSum = atomsSum
-                    + Trees.traverse(
-                                    constraintIterator.next().getFormula(),
-                                    new AtomsCount(
-                                            COUNTVARIABLES.get(dependencyList),
-                                            COUNTCONSTANTS.get(dependencyList),
-                                            COUNTBOOLEAN.get(dependencyList)))
-                            .orElse(0);
+            unionSet.addAll(Trees.traverse(constraintIterator.next().getFormula(), new FeatureDensityTreeVisitor())
+                    .orElse(Collections.emptySet()));
         }
-        int numberOfConstraints = featureModel.getConstraints().size();
-        float averageConstraint = (numberOfConstraints == 0) ? 0 : (float) atomsSum / (float) numberOfConstraints;
-        return Result.of(averageConstraint);
+        return Result.of((float) unionSet.size()
+                / (float) FEATUREMODEL.get(dependencyList).getNumberOfFeatures());
     }
 }
