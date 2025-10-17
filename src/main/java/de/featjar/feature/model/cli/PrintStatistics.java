@@ -67,7 +67,7 @@ public class PrintStatistics extends ACommand {
         CONSTRAINT_RELATED
     }
 
-    private int exit_status = 0;
+    private int exitStatus = 0;
 
     public static final Option<AnalysesScope> ANALYSES_SCOPE =
             Option.newEnumOption("scope", AnalysesScope.class).setDescription("Specifies scope of statistics");
@@ -131,7 +131,7 @@ public class PrintStatistics extends ACommand {
             writeTo(outputPath, data);
             FeatJAR.log().message("Feature Model saved at: " + outputPath);
         }
-        return exit_status;
+        return exitStatus;
     }
 
     /**
@@ -157,11 +157,11 @@ public class PrintStatistics extends ACommand {
                     break;
                 case "":
                     FeatJAR.log().error("Output file does not include file type.");
-                    exit_status = 1;
+                    exitStatus = 1;
                     break;
                 default:
                     FeatJAR.log().error("File type not valid: " + type);
-                    exit_status = 1;
+                    exitStatus = 1;
             }
         } catch (Exception e) {
             FeatJAR.log().error(e);
@@ -191,11 +191,11 @@ public class PrintStatistics extends ACommand {
                     "Average Constraints",
                     Computations.of(model).map(ComputeAverageConstraint::new).compute());
 
-            HashMap<String, Integer> computational_opDensity =
+            HashMap<String, Integer> computationalOpDensity =
                     Computations.of(model).map(ComputeOperatorDistribution::new).compute();
 
-            if (computational_opDensity.size() != 0) {
-                data.put("Operator Distribution", computational_opDensity);
+            if (computationalOpDensity.size() != 0) {
+                data.put("Operator Distribution", computationalOpDensity);
             }
         }
 
