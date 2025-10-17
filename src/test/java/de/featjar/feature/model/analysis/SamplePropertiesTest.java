@@ -294,7 +294,6 @@ public class SamplePropertiesTest {
         assertEquals(((float) 0 / 3) - ((float) 0 / 26), result.get("Windows_undefined"));
         assertEquals(((float) 0 / 3) - ((float) 0 / 26), result.get("Linux_undefined"));
         assertEquals(((float) 0 / 3) - ((float) 0 / 26), result.get("Transactions_undefined"));
-        System.out.println(result);
 
         FeatJAR.deinitialize();
     }
